@@ -1,0 +1,40 @@
+name: Monthly DDR5 Data Refresh
+
+on:
+  schedule:
+    # Runs monthly at 10:00 UTC on the 1st day of each month.
+    - cron: "0 10 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build latest data bundle
+        run: python ddr5-prices/build_ddr5_data.py
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- ddr5-prices/ddr5-data.js; then
+            echo "No changes in ddr5-data.js"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add ddr5-prices/ddr5-data.js
+          git commit -m "chore(data): monthly DDR5 refresh"
+          git push

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reaction Lab Premium Trio</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Premium Reaction Collection</p>
+        <h1>Reaction Lab Elite</h1>
+        <p class="subtitle">
+          Three high-stakes tap-only games engineered for layered scoring, tighter precision curves,
+          and competitive replay depth.
+        </p>
+      </header>
+
+      <section class="layout">
+        <aside class="game-list" id="gameList" aria-label="Game selector"></aside>
+
+        <section class="playground">
+          <div class="playground-head">
+            <div>
+              <h2 id="gameTitle">Pick a game</h2>
+              <p id="gameBlurb" class="game-blurb">Choose a premium mode to begin.</p>
+            </div>
+            <div class="recommendation" id="recommendationBadge">Premium Tier Active</div>
+          </div>
+
+          <div class="hud">
+            <div class="hud-item">
+              <span class="label">Score</span>
+              <span class="value" id="hudScore">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="label">Round</span>
+              <span class="value" id="hudRound">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="label">Streak</span>
+              <span class="value" id="hudCombo">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="label">Penalties</span>
+              <span class="value" id="hudPenalties">0</span>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="startBtn" class="btn btn-primary">Start Run</button>
+            <button id="resetBtn" class="btn btn-ghost">Reset</button>
+            <button id="actionBtn" class="btn btn-accent">Tap (Space)</button>
+            <span id="statusPill" class="status-pill">Idle</span>
+          </div>
+
+          <section class="stage-wrap">
+            <div id="stage" class="stage" role="application" aria-label="Game stage"></div>
+
+            <div id="countdownOverlay" class="overlay hidden" aria-hidden="true">
+              <div class="overlay-card countdown-card">
+                <p class="overlay-kicker">Get Ready</p>
+                <div class="countdown-value" id="countdownValue">3</div>
+              </div>
+            </div>
+
+            <div id="resultOverlay" class="overlay hidden" aria-live="polite">
+              <div class="overlay-card result-card">
+                <p class="overlay-kicker">Session Complete</p>
+                <h3 id="resultTitle">Result</h3>
+                <p class="result-score" id="resultScore">0</p>
+                <p class="result-summary" id="resultSummary"></p>
+                <div class="result-meta">
+                  <span id="resultPercentile">Percentile: --</span>
+                  <span id="resultLeaderboard">Leaderboard: --</span>
+                </div>
+                <div class="result-actions">
+                  <button id="shareBtn" class="btn btn-accent">Copy Share</button>
+                  <button id="replayBtn" class="btn btn-primary">Replay</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <p class="help-text" id="helpText">Tap action button or press Space to play.</p>
+
+          <section class="insights">
+            <article class="insight-card" id="setupCard"></article>
+
+            <article class="insight-card">
+              <div class="insight-head">
+                <h3>Leaderboard</h3>
+                <span class="insight-sub">Top 5 Runs</span>
+              </div>
+              <ol id="leaderboardList" class="leaderboard-list"></ol>
+            </article>
+
+            <article class="insight-card">
+              <div class="insight-head">
+                <h3>Achievements</h3>
+                <span class="insight-sub">Unlocked</span>
+              </div>
+              <ul id="achievementList" class="achievement-list"></ul>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

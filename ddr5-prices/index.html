@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDR5 Desktop RAM Prices (CAD)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <main class="shell">
+    <header class="hero card">
+      <p class="eyebrow">Local Interactive Dashboard</p>
+      <h1>DDR5 Desktop Module Prices in CAD</h1>
+      <p class="subhead">
+        5-year monthly view with 10-year forward projection for <strong>16GB</strong>, <strong>32GB</strong>, and <strong>64GB</strong> per module.
+      </p>
+      <div class="meta" id="generatedMeta"></div>
+    </header>
+
+    <section class="controls card">
+      <div class="control-group">
+        <span class="control-label">Capacity</span>
+        <label class="chip"><input type="checkbox" data-capacity="16" checked /><span class="dot d16"></span>16GB</label>
+        <label class="chip"><input type="checkbox" data-capacity="32" checked /><span class="dot d32"></span>32GB</label>
+        <label class="chip"><input type="checkbox" data-capacity="64" checked /><span class="dot d64"></span>64GB</label>
+      </div>
+
+      <div class="control-group">
+        <span class="control-label">View</span>
+        <label class="chip"><input type="radio" name="viewMode" value="both" checked />Both</label>
+        <label class="chip"><input type="radio" name="viewMode" value="historical" />Historical</label>
+        <label class="chip"><input type="radio" name="viewMode" value="projection" />Projection</label>
+      </div>
+
+      <button id="exportCsv" class="export-btn">Export CSV</button>
+    </section>
+
+    <section class="chart-wrap card">
+      <div class="chart-frame">
+        <canvas id="priceChart" aria-label="DDR5 CAD price chart" role="img"></canvas>
+      </div>
+      <p class="note">
+        Solid lines: historical series. Dashed lines: projections. Vertical marker: where observed benchmark index starts.
+      </p>
+    </section>
+
+    <div class="detail-grid">
+      <section class="summary card">
+        <h2>Snapshot</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Capacity</th>
+                <th>Launch Month</th>
+                <th>Latest (Feb 2026)</th>
+                <th>Projected (Feb 2036)</th>
+                <th>10Y Delta</th>
+              </tr>
+            </thead>
+            <tbody id="summaryRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="method card">
+        <h2>Method & Sources</h2>
+        <ul id="sourceList"></ul>
+        <p>
+          Historical index is directly observed for recent months; earlier months are backfilled with a transparent curve to cover the full 5-year window.
+          Projection uses a mean-reverting growth model with a cyclical memory-market component.
+        </p>
+      </section>
+    </div>
+
+    <noscript>
+      <section class="card">
+        JavaScript is required to render the interactive chart.
+      </section>
+    </noscript>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="./ddr5-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
